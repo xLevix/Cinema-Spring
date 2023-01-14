@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface ScreeningRepository extends JpaRepository<Screening, Integer> {
 
     List<Screening> findAllByIdMovieId(Integer id);
+
+    Optional<Screening> findById(Integer id);
 }

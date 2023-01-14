@@ -1,6 +1,7 @@
 package com.kino.springjwt.entity;
 
 import com.kino.springjwt.models.User;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ public class Reservation {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "ID_SCREENING")
     private Screening idScreening;
 

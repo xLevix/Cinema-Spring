@@ -3,9 +3,12 @@ package com.kino.springjwt.controllers;
 import com.kino.springjwt.DAO.MovieDAO;
 import com.kino.springjwt.DAO.ReservationDAO;
 import com.kino.springjwt.DAO.ScreeningDAO;
+import com.kino.springjwt.DAO.UserDAO;
 import com.kino.springjwt.DTO.MovieDTO;
+import com.kino.springjwt.DTO.NewReservation;
 import com.kino.springjwt.DTO.ReservationDTO;
 import com.kino.springjwt.DTO.ScreeningDTO;
+import com.kino.springjwt.entity.Reservation;
 import com.kino.springjwt.entity.Screening;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,12 +22,14 @@ public class FilmController {
     private final MovieDAO movieDAO;
     private final ScreeningDAO screeningDAO;
     private final ReservationDAO reservationDAO;
+    private final UserDAO userDAO;
 
     @Autowired
-    public FilmController(MovieDAO movieDAO, ScreeningDAO screeningDAO, ReservationDAO reservationDAO) {
+    public FilmController(MovieDAO movieDAO, ScreeningDAO screeningDAO, ReservationDAO reservationDAO, UserDAO userDAO) {
         this.movieDAO = movieDAO;
         this.screeningDAO = screeningDAO;
         this.reservationDAO = reservationDAO;
+        this.userDAO = userDAO;
     }
 
     @GetMapping("/filmy")
@@ -53,7 +58,7 @@ public class FilmController {
 
     @GetMapping("/seanse/{id}")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ScreeningDTO getScreening(@PathVariable("id") int id) {
+    public Screening getScreening(@PathVariable("id") int id) {
         return screeningDAO.getScreeningById(id);
     }
 
@@ -61,6 +66,18 @@ public class FilmController {
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public List<ReservationDTO> getReservationsByScreening(@PathVariable("id") int id) {
         return reservationDAO.getReservationsByScreening(id);
+    }
+
+    @PostMapping("/rezerwacja/add")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    public void addReservation(@RequestBody NewReservation newReservation) {
+        Reservation reservation = new Reservation();
+        reservation.setName(newReservation.getName());
+        reservation.setLastName(newReservation.getLastName());
+        reservation.setSeatNumber(newReservation.getSeatNumber());
+        reservation.setIdScreening(screeningDAO.getScreeningById(newReservation.getIdScreening()));
+        reservation.setUserId(userDAO.findById(newReservation.getUserId()));
+        reservationDAO.save(reservation);
     }
 
 

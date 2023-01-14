@@ -1,5 +1,7 @@
 package com.kino.springjwt.entity;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -11,7 +13,7 @@ public class Screening {
     @Column(name = "ID_SCREENING", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_MOVIE")
     private Movie idMovie;
 
@@ -23,6 +25,13 @@ public class Screening {
 
     @Column(name = "SEATS")
     private Integer seats;
+
+    public Screening(Screening screening) {
+    }
+
+    public Screening() {
+
+    }
 
     public Integer getId() {
         return id;

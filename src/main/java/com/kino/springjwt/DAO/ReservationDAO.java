@@ -32,7 +32,7 @@ public class ReservationDAO {
         Reservation reservation = new Reservation();
         reservation.setName(newReservation.getName());
         reservation.setLastName(newReservation.getLastName());
-        reservation.setUserId(userDAO.findById(newReservation.getUserId().getId()));
+        reservation.setUserId(userDAO.findById(Math.toIntExact(newReservation.getUserId())));
         reservation.setSeatNumber(newReservation.getSeatNumber());
         //reservation.setIdScreening(screeningDAO.getScreeningById(newReservation.getIdScreening()));
         reservationRepository.save(reservation);

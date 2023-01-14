@@ -1,18 +1,20 @@
 package com.kino.springjwt.DTO;
 
+import com.kino.springjwt.models.User;
+
 public class NewReservation {
 
     private Integer id;
     private String name;
     private String lastName;
-    private UserDTO userId;
+    private Integer userId;
     private Integer seatNumber;
     private Integer idScreening;
 
     public NewReservation() {
     }
 
-    public NewReservation(Integer id, String name, String lastName, UserDTO userId, Integer seatNumber, Integer idScreening) {
+    public NewReservation(Integer id, String name, String lastName, Integer userId, Integer seatNumber, Integer idScreening) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -45,11 +47,11 @@ public class NewReservation {
         this.lastName = lastName;
     }
 
-    public UserDTO getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(UserDTO userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

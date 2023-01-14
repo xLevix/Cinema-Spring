@@ -20,8 +20,8 @@ public class ScreeningDAO {
         return screeningRepository.findAll();
     }
 
-    public ScreeningDTO getScreeningById(Integer id) {
-        return new ScreeningDTO(screeningRepository.findById(id).get());
+    public Screening getScreeningById(Integer id) {
+        return screeningRepository.findById(id).get();
     }
 
     public Screening save(Screening screening) {
