@@ -57,4 +57,8 @@ public class ReservationDAO {
     public List<ReservationDTO> getReservationsByScreening(int id) {
         return reservationRepository.findAllByIdScreeningId(id).stream().map(ReservationDTO::new).collect(java.util.stream.Collectors.toList());
     }
+
+    public List<ReservationDTO> getReservationsByUser(int id) {
+        return reservationRepository.findAllByUserIdId((long) id).stream().map(ReservationDTO::new).collect(java.util.stream.Collectors.toList());
+    }
 }

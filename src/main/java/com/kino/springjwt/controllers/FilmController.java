@@ -80,8 +80,10 @@ public class FilmController {
         reservationDAO.save(reservation);
     }
 
-
-
-
+    @GetMapping("/rezerwacje/user/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    public List<ReservationDTO> getReservationsByUser(@PathVariable("id") int id) {
+        return reservationDAO.getReservationsByUser(id);
+    }
 
 }
