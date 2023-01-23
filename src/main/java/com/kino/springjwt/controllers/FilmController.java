@@ -15,6 +15,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class FilmController {
@@ -84,6 +86,14 @@ public class FilmController {
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public List<ReservationDTO> getReservationsByUser(@PathVariable("id") int id) {
         return reservationDAO.getReservationsByUser(id);
+    }
+
+
+    //search film by contain word
+    @GetMapping("/filmy/search/{word}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    public List<MovieDTO> getMoviesByWord(@PathVariable("word") String word) {
+        return movieDAO.getMoviesByWord(word);
     }
 
 }

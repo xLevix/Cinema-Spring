@@ -11,4 +11,5 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     Optional<Movie> findById(Integer id);
 
+    Optional<Movie> findAllByNameContainingIgnoreCase(String word);
 }

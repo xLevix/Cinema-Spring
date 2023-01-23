@@ -6,6 +6,8 @@ import com.kino.springjwt.service.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieDAO {
@@ -41,5 +43,9 @@ public class MovieDAO {
         movie.setPegi(movieDTO.getPegi());
         movie.setRating(movieDTO.getRating());
         movieRepository.save(movie);
+    }
+
+    public List<MovieDTO> getMoviesByWord(String word) {
+        return movieRepository.findAllByNameContainingIgnoreCase(word).map(MovieDTO::new).stream().collect(Collectors.toList());
     }
 }
