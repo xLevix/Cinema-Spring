@@ -12,20 +12,12 @@ import java.util.List;
 public class ReservationDAO {
 
     private final ReservationRepository reservationRepository;
-    private ScreeningDAO screeningDAO;
+    private final ScreeningDAO screeningDAO;
     private UserDAO userDAO;
 
     public ReservationDAO(ReservationRepository reservationRepository, ScreeningDAO screeningDAO) {
         this.reservationRepository = reservationRepository;
         this.screeningDAO = screeningDAO;
-    }
-
-    public List<ReservationDTO> getAllReservations() {
-        return reservationRepository.findAll().stream().map(ReservationDTO::new).collect(java.util.stream.Collectors.toList());
-    }
-
-    public ReservationDTO getReservationById(Integer id) {
-        return new ReservationDTO(reservationRepository.findById(id).get());
     }
 
     public void add(NewReservation newReservation) {
@@ -34,7 +26,7 @@ public class ReservationDAO {
         reservation.setLastName(newReservation.getLastName());
         reservation.setUserId(userDAO.findById(Math.toIntExact(newReservation.getUserId())));
         reservation.setSeatNumber(newReservation.getSeatNumber());
-        //reservation.setIdScreening(screeningDAO.getScreeningById(newReservation.getIdScreening()));
+        reservation.setIdScreening(screeningDAO.getScreeningById(newReservation.getIdScreening()));
         reservationRepository.save(reservation);
     }
 
@@ -44,14 +36,6 @@ public class ReservationDAO {
 
     public void save(Reservation reservation) {
         reservationRepository.save(reservation);
-    }
-
-    public List<Integer> getTakenSeatsByIdScreening(Integer idScreening) {
-        return reservationRepository.findAllByIdScreeningId(idScreening).stream().map(Reservation::getSeatNumber).collect(java.util.stream.Collectors.toList());
-    }
-
-    public List<Reservation> getReservationsByIdScreening(Integer idScreening) {
-        return reservationRepository.findAllByIdScreeningId(idScreening);
     }
 
     public List<ReservationDTO> getReservationsByScreening(int id) {

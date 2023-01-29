@@ -1,7 +1,5 @@
 package com.kino.springjwt.DTO;
 
-import com.kino.springjwt.models.User;
-
 public class NewReservation {
 
     private Integer id;

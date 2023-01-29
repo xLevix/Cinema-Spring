@@ -12,7 +12,6 @@ public class ScreeningDTO {
     private Timestamp date;
     private Integer seats;
 
-
     public ScreeningDTO(){
 
     }

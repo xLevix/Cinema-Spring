@@ -48,4 +48,8 @@ public class MovieDAO {
     public List<MovieDTO> getMoviesByWord(String word) {
         return movieRepository.findAllByNameContainingIgnoreCase(word).map(MovieDTO::new).stream().collect(Collectors.toList());
     }
+
+    public Movie getMovieByIdMovie(Integer id) {
+        return movieRepository.findById(id).get();
+    }
 }

@@ -4,10 +4,8 @@ import com.kino.springjwt.DAO.MovieDAO;
 import com.kino.springjwt.DAO.ReservationDAO;
 import com.kino.springjwt.DAO.ScreeningDAO;
 import com.kino.springjwt.DAO.UserDAO;
-import com.kino.springjwt.DTO.MovieDTO;
-import com.kino.springjwt.DTO.NewReservation;
-import com.kino.springjwt.DTO.ReservationDTO;
-import com.kino.springjwt.DTO.ScreeningDTO;
+import com.kino.springjwt.DTO.*;
+import com.kino.springjwt.entity.Movie;
 import com.kino.springjwt.entity.Reservation;
 import com.kino.springjwt.entity.Screening;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +51,7 @@ public class FilmController {
     }
 
     @PostMapping("/filmy/add")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public void addMovie(@RequestBody MovieDTO movieDTO) {
         movieDAO.addMovie(movieDTO);
     }
@@ -74,7 +72,7 @@ public class FilmController {
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public void addReservation(@RequestBody NewReservation newReservation) {
         Reservation reservation = new Reservation();
-        reservation.setName(newReservation.getName());
+        reservation.setName(newReservation.getName().split(" ")[0]);
         reservation.setLastName(newReservation.getLastName());
         reservation.setSeatNumber(newReservation.getSeatNumber());
         reservation.setIdScreening(screeningDAO.getScreeningById(newReservation.getIdScreening()));
@@ -88,12 +86,42 @@ public class FilmController {
         return reservationDAO.getReservationsByUser(id);
     }
 
-
-    //search film by contain word
     @GetMapping("/filmy/search/{word}")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public List<MovieDTO> getMoviesByWord(@PathVariable("word") String word) {
         return movieDAO.getMoviesByWord(word);
     }
+
+    @PostMapping("/seanse/add")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
+    public void addScreening(@RequestBody NewScreening newScreening) {
+        Screening screening = new Screening();
+        screening.setDate(newScreening.getDate());
+        screening.setPrice(newScreening.getPrice());
+        screening.setPrice(newScreening.getPrice());
+        screening.setIdMovie(movieDAO.getMovieByIdMovie(newScreening.getIdMovie()));
+        screening.setSeats(newScreening.getSeats());
+        screeningDAO.save(screening);
+    }
+
+    @GetMapping("/seanse")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
+    public List<Screening> getScreenings() {
+        return screeningDAO.getAllScreenings();
+    }
+
+    @PutMapping("/seanse/modify/{id}")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
+    public void updateScreening(@PathVariable("id") int id, @RequestBody NewScreening newScreening) {
+        Screening screening = screeningDAO.getScreeningById(id);
+        screening.setDate(newScreening.getDate());
+        screening.setPrice(newScreening.getPrice());
+        screening.setIdMovie(movieDAO.getMovieByIdMovie(newScreening.getIdMovie()));
+        screening.setSeats(newScreening.getSeats());
+        screeningDAO.save(screening);
+    }
+
+
+
 
 }
