@@ -15,9 +15,9 @@
 	<name>spring-boot-security-jwt</name>
 	<description>Demo project for Spring Boot Security - JWT</description>
 
-	<properties>
+<!-- 	<properties>
 		<java.version>1.8</java.version>
-	</properties>
+	</properties> -->
 
 	<dependencies>
 		<dependency>
