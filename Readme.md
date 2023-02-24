@@ -1,4 +1,4 @@
-# Cinema Project made in Spring Boot.
+# Cinema Project made in Spring Boot and React.
 The project uses a database put up on H2. Communication via JPA.
 JWT tokens were used as a method of user authorization. 
 Every query from the api is pre-authorized, which means you have to be logged in to see or add anything. 
