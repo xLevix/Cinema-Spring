@@ -1,6 +1,7 @@
 package com.kino.springjwt.security;
 
 import com.kino.springjwt.security.services.UserDetailsServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.kino.springjwt.security.jwt.AuthEntryPointJwt;
 import com.kino.springjwt.security.jwt.AuthTokenFilter;
 
+
 @Configuration
+@AllArgsConstructor
 @EnableGlobalMethodSecurity(
     prePostEnabled = true)
 public class WebSecurityConfig {

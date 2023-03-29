@@ -1,6 +1,6 @@
 package com.kino.springjwt.DTO;
 
-import com.kino.springjwt.models.User;
+import com.kino.springjwt.entity.User;
 
 public class UserDTO {
     private Integer id;

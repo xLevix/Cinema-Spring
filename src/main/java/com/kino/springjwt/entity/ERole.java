@@ -1,4 +1,4 @@
-package com.kino.springjwt.models;
+package com.kino.springjwt.entity;
 
 public enum ERole {
   ROLE_USER,

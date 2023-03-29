@@ -3,7 +3,7 @@ package com.kino.springjwt.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.kino.springjwt.models.User;
+import com.kino.springjwt.entity.User;
 
 import java.util.Optional;
 

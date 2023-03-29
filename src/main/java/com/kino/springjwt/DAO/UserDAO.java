@@ -1,6 +1,6 @@
 package com.kino.springjwt.DAO;
 
-import com.kino.springjwt.models.User;
+import com.kino.springjwt.entity.User;
 import com.kino.springjwt.repository.UserRepository;
 import org.springframework.stereotype.Service;
 

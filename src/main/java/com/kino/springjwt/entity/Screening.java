@@ -1,11 +1,15 @@
 package com.kino.springjwt.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "SCREENING")
 public class Screening {
     @Id
@@ -32,45 +36,4 @@ public class Screening {
     public Screening() {
 
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Movie getIdMovie() {
-        return idMovie;
-    }
-
-    public void setIdMovie(Movie idMovie) {
-        this.idMovie = idMovie;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Timestamp getDate() {
-        return date;
-    }
-
-    public void setDate(Timestamp date) {
-        this.date = date;
-    }
-
-    public Integer getSeats() {
-        return seats;
-    }
-
-    public void setSeats(Integer seats) {
-        this.seats = seats;
-    }
-
 }

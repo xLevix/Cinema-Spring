@@ -1,11 +1,14 @@
 package com.kino.springjwt.entity;
 
-import com.kino.springjwt.models.User;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
 @Entity
+@Setter
+@Getter
 @Table(name = "RESERVATION")
 public class Reservation {
     @Id
@@ -31,52 +34,7 @@ public class Reservation {
     @Column(name = "SEAT_NUMBER")
     private Integer seatNumber;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Screening getIdScreening() {
-        return idScreening;
-    }
-
-    public void setIdScreening(Screening idScreening) {
-        this.idScreening = idScreening;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-
-    public Integer getSeatNumber() {
-        return seatNumber;
-    }
-
-    public void setSeatNumber(Integer seatNumber) {
-        this.seatNumber = seatNumber;
+    public Reservation() {
     }
 
 }

@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kino.springjwt.models.ERole;
-import com.kino.springjwt.models.Role;
-import com.kino.springjwt.models.User;
+import com.kino.springjwt.entity.ERole;
+import com.kino.springjwt.entity.Role;
+import com.kino.springjwt.entity.User;
 import com.kino.springjwt.payload.response.JwtResponse;
 import com.kino.springjwt.payload.response.MessageResponse;
 import com.kino.springjwt.repository.RoleRepository;
